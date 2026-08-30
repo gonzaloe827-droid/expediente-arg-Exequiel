@@ -3,30 +3,30 @@
 nombre: Gonzalo Exequiel Bautista 
 variante 3 
 
-##1: Actores 
+## 1: Actores 
 
-###1. Cliente o huesped 
+### 1. Cliente o huesped 
 Consulta habitaciones disponibles
 Realiza reservas
 Cancela reservas
 Consulta sus reservas
 
-###2. Recepcionista 
+### 2. Recepcionista 
 Registra huéspedes
 Gestiona reservas
 Consulta la disponibilidad de habitaciones
 
-###3. Administrador
+### 3. Administrador
 Administra habitaciones
 Administra usuarios
 Gestiona tarifas
 Consulta información del hostal
 
-###4. Personal de limpieza
+### 4. Personal de limpieza
 Consulta el estado de las habitaciones
 Actualiza el estado de las habitaciones después de la limpieza
 
-##2:Inventarios de modulos 
+## 2:Inventarios de modulos 
 
 ### 1. Gestión de habitaciones
 Responsabilidad: 
@@ -49,6 +49,23 @@ Gestionar la entrada y salida de los huéspedes.
 Responsabilidad:
 Registrar y controlar los pagos de las reservas.
 
-3: diagrama de clases UML 
+## 3: diagrama de clases UML 
 
-4: Atributos de calidad criticos 
+Primer borrador del diagrama de clases 
+![Diagrama UML](diagramahostal.png)
+
+## 4: Atributos de calidad criticos 
+
+### 1. Seguridad
+
+La seguridad es un atributo crítico porque el sistema manejará
+información personal de los huéspedes, reservas y pagos. Se deben controlar
+los accesos según el tipo de usuario para evitar modificaciones o accesos
+no autorizados a la información.
+
+### 2. Disponibilidad
+
+La disponibilidad es crítica porque el sistema será utilizado
+para consultar habitaciones y gestionar reservas durante las operaciones
+del hostal. Una interrupción del sistema podría impedir registrar reservas,
+consultar disponibilidad y realizar correctamente la atención al huésped.
