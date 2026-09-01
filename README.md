@@ -69,3 +69,23 @@ La disponibilidad es crítica porque el sistema será utilizado
 para consultar habitaciones y gestionar reservas durante las operaciones
 del hostal. Una interrupción del sistema podría impedir registrar reservas,
 consultar disponibilidad y realizar correctamente la atención al huésped.
+
+# Práctica 1 SOLID 
+
+## Responsabilidad Única
+
+### Problema
+
+En mi diseño inicial, la clase `Reserva` tenía varias funciones, como crear, cancelar y confirmar una reserva, además de hacer el check-in y check-out. Vi que estaba haciendo demasiadas cosas.
+
+### Solución
+
+Para aplicar SRP, separé esas funciones en diferentes clases. Dejé `Reserva` para guardar los datos de la reserva, `GestorDeReservas` para crear, cancelar y confirmar reservas, y `GestorDeEstadia` para realizar el check-in y check-out.
+
+### Resultado
+
+Con este cambio, cada clase tiene una responsabilidad más clara. Así, si necesito cambiar algo de las reservas, modifico `GestorDeReservas`, y si cambia el proceso de check-in o check-out, modifico `GestorDeEstadia`.
+
+## Diagrama de la práctica SRP
+
+![Diagrama SRP](practica-srp-hostal.png.png)
