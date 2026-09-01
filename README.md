@@ -89,3 +89,23 @@ Con este cambio, cada clase tiene una responsabilidad más clara. Así, si neces
 ## Diagrama de la práctica SRP
 
 ![Diagrama SRP](practica-srp-hostal.png.png)
+
+# Práctica 2 SOLID 
+
+## Principio Abierto/Cerrado
+
+### Problema
+
+En el sistema pueden existir diferentes tipos de habitaciones. Si se utilizara un switch para identificar cada tipo, sería necesario modificar el código cada vez que aparezca un nuevo tipo.
+
+### Solución
+
+Creé la interfaz `TipoHabitacion`, que contiene el método `calcularPrecio()`. Luego cada tipo de habitación implementa esta interfaz.
+
+### Resultado
+
+El sistema puede trabajar con diferentes tipos de habitaciones sin modificar las clases existentes. Si aparece un nuevo tipo, solamente se crea una nueva clase que implemente `TipoHabitacion`.
+
+## Diagrama OCP
+
+![Diagrama OCP](practica2.png.png)
