@@ -133,3 +133,31 @@ Cada clase cumple solamente las funciones que puede realizar. De esta manera, lo
 ## Diagrama LSP
 
 ![Diagrama LSP](practica3.drawio.png)
+
+## Práctica 4 solid - Los contratos de mis roles
+
+Para mi sistema de reservas de un hostal trabajé con los roles
+Recepcionista y Administrador.
+
+El Recepcionista tiene las capacidades de registrar huéspedes y
+gestionar reservas.
+
+El Administrador puede gestionar reservas, habitaciones, usuarios
+y tarifas.
+
+La capacidad que comparten ambos roles es la gestión de reservas.
+
+Para evitar que un rol tenga métodos que no necesita, separé las
+capacidades en diferentes interfaces: IRegistrador, IGestorReservas,
+IGestorHabitaciones, IGestorUsuarios e IGestorTarifas.
+
+De esta manera cada rol solamente implementa las interfaces que
+corresponden a sus funciones.
+
+Si se utilizara una sola interfaz con todas las funciones, el
+Recepcionista tendría que implementar funciones que pertenecen al
+Administrador. Por eso es mejor separar los contratos.
+
+### Diagrama UML
+
+![Diagrama de contratos](practica4.drawio.png)
