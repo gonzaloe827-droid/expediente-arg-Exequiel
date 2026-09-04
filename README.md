@@ -109,3 +109,27 @@ El sistema puede trabajar con diferentes tipos de habitaciones sin modificar las
 ## Diagrama OCP
 
 ![Diagrama OCP](practica2.png.png)
+
+# Práctica 3 SOLID - LSP
+
+## Principio de Sustitución de Liskov
+
+### Problema
+
+En el diseño inicial, la clase `Usuario` tenía funciones que no todos sus hijos podían realizar. Por ejemplo, un `Cliente` no debería administrar habitaciones ni gestionar las reservas de otros huéspedes.
+
+### Solución
+
+Se dejó en `Usuario` solamente las funciones comunes a todos los usuarios: iniciar sesión y cerrar sesión.
+
+Las funciones específicas se separaron mediante las interfaces `GestionaReservas` y `AdministraHabitaciones`.
+
+`Recepcionista` implementa `GestionaReservas`, mientras que `Administrador` implementa `GestionaReservas` y `AdministraHabitaciones`.
+
+### Resultado
+
+Cada clase cumple solamente las funciones que puede realizar. De esta manera, los hijos pueden sustituir correctamente a su clase padre sin generar comportamientos incorrectos.
+
+## Diagrama LSP
+
+![Diagrama LSP](practica3.drawio.png)
