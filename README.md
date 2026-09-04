@@ -161,3 +161,31 @@ Administrador. Por eso es mejor separar los contratos.
 ### Diagrama UML
 
 ![Diagrama de contratos](practica4.drawio.png)
+
+
+## Práctica 5 - Caza tus new peligrosos
+
+En mi sistema de reservas de un hostal encontré que la gestión de
+reservas podría depender directamente de una base de datos MySQL.
+
+El problema es que GestionReservas quedaría dependiendo directamente
+de un detalle específico.
+
+Para solucionarlo creé la interfaz IReservaRepository como contrato.
+Esta interfaz tiene los métodos guardarReserva() y eliminarReserva().
+
+GestionReservas ahora depende de IReservaRepository y no directamente
+de BaseDatosMySQL.
+
+BaseDatosMySQL implementa la interfaz IReservaRepository.
+
+También creé RepositorioReservaPrueba, que implementa la misma
+interfaz y permite realizar pruebas sin utilizar una base de datos
+real.
+
+De esta manera puedo cambiar la implementación de la base de datos
+sin modificar la lógica de GestionReservas.
+
+### Diagrama
+
+![Diagrama Cazá tus new peligrosos](practica5.drawio.png)
