@@ -47,7 +47,7 @@ principio
 Este método hace muchas cosas diferentes en un solo lugar
 
 
-
+![Diagrama UML](despues.drawio.png)
  
  
  
