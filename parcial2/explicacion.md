@@ -5,5 +5,5 @@
 
 ### Patrón: Observer
 
-Elegiría Observer porque cuando vence una membresía se debe avisar a  muchas partes bueno actualmente el módulo de socios tiene que llamar uno por uno a cada interesado
-si aparece otro módulo, habría que volver a modificar el módulo de socios con Observer se puede avisar a todos los interesados sin cambiar esa parte del sistema
+Yo elegiría Observer porque cuando una membresía vence se necesita avisar a varias partes del gimnasio. ahora el módulo de socios tiene que avisar uno por uno a whatsap al registro de vencidos y a recepción 
+el problema es que si después aparece otro módulo que también necesita recibir el aviso tenemos que volver a modificar el módulo de socios con Observer podemos hacer que el módulo avise una sola vez y que los demás reciban la notificación cuando estén registrados.
