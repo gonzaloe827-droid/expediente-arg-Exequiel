@@ -21,5 +21,5 @@ actualmente este cálculo está dentro de un if/else y además está repetido en
 
 Yo elegiría Adapter porque el gimnasio necesita usar una pasarela de pago que funciona de una manera diferente a nuestro sistema a pasarela utiliza nombres en ingles trabaja con el monto en centavos y utiliza un token que nuestro sistema no maneja directamente
 ademas nosotros no podemos modificar el código de la pasarela porque pertenece al proveedor con Adapter podemos hacer una conexión entre nuestro sistema y la pasarela sin tener que cambiar el codigo de la pasarela 
-
+En mi solución aplico DIP porque el sistema no depende directamente de la pasarela de pago Uso una interfaz y el adapter hace la conexión con la pasarela Asi si después se cambia la pasarela no tendría que cambiar la clase principal que hace el cobro
 
