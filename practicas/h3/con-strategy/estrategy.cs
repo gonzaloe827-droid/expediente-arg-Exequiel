@@ -8,7 +8,6 @@ public interface IMetodoPago
     void Pagar(decimal monto);
 }
 
-// ESTRATEGIA 1 - PAGO EN EFECTIVO
 
 public class PagoEfectivo : IMetodoPago
 {
@@ -18,7 +17,6 @@ public class PagoEfectivo : IMetodoPago
     }
 }
 
-// ESTRATEGIA 2 - PAGO CON TARJETA
 
 public class PagoTarjeta : IMetodoPago
 {
@@ -28,7 +26,6 @@ public class PagoTarjeta : IMetodoPago
     }
 }
 
-// ESTRATEGIA 3 - PAGO CON QR
 
 public class PagoQR : IMetodoPago
 {
@@ -38,7 +35,6 @@ public class PagoQR : IMetodoPago
     }
 }
 
-// GESTIÓN DE PAGOS
 
 public class GestionPagos
 {
@@ -55,13 +51,12 @@ public class GestionPagos
     }
 }
 
-// DEMOSTRACIÓN
 
 public static class Demo
 {
     public static void Correr()
     {
-        Console.WriteLine("        PRÁCTICA 2 - STRATEGY");
+        Console.WriteLine("        STRATEGY");
         Console.WriteLine();
 
         var pagoEfectivo =
