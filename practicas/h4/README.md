@@ -2,6 +2,9 @@
 # C4 - Sistema de Reservas de un Hostal
 
 ## Nivel 1 - Contexto
+
+En este nivel se muestra el sistema de reservas del hostal y las personas y sistemas externos que tienen relación con el aquí se puede ver quién utiliza el sistema y para qué lo utiliza ademas de los servicios externos que ayudan al funcionamiento del sistema.
+
 ```mermaid
 C4Context
 
