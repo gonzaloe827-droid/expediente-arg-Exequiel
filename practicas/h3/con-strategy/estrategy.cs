@@ -3,63 +3,59 @@ namespace H3.Strategy;
 
 // CONTRATO DE LA ESTRATEGIA
 
-public interface IEstrategiaPrecio
+public interface IMetodoPago
 {
-    decimal CalcularPrecio();
+    void Pagar(decimal monto);
 }
 
+// ESTRATEGIA 1 - PAGO EN EFECTIVO
 
-public class PrecioPrivado : IEstrategiaPrecio
+public class PagoEfectivo : IMetodoPago
 {
-    public decimal CalcularPrecio()
+    public void Pagar(decimal monto)
     {
-        return 200;
+        Console.WriteLine($"Pago de reserva realizado en efectivo: {monto:0.00} Bs");
     }
 }
 
+// ESTRATEGIA 2 - PAGO CON TARJETA
 
-public class PrecioCompartido : IEstrategiaPrecio
+public class PagoTarjeta : IMetodoPago
 {
-    public decimal CalcularPrecio()
+    public void Pagar(decimal monto)
     {
-        return 100;
+        Console.WriteLine($"Pago de reserva realizado con tarjeta: {monto:0.00} Bs");
     }
 }
 
+// ESTRATEGIA 3 - PAGO CON QR
 
-public class PrecioTemporadaPrivado : IEstrategiaPrecio
+public class PagoQR : IMetodoPago
 {
-    public decimal CalcularPrecio()
+    public void Pagar(decimal monto)
     {
-        return 200 * 1.30m;
+        Console.WriteLine($"Pago de reserva realizado con QR: {monto:0.00} Bs");
     }
 }
 
+// GESTIÓN DE PAGOS
 
-public class PrecioTemporadaCompartido : IEstrategiaPrecio
+public class GestionPagos
 {
-    public decimal CalcularPrecio()
+    private IMetodoPago metodoPago;
+
+    public GestionPagos(IMetodoPago metodoPago)
     {
-        return 100 * 1.30m;
+        this.metodoPago = metodoPago;
+    }
+
+    public void RegistrarPago(decimal monto)
+    {
+        metodoPago.Pagar(monto);
     }
 }
 
-
-public class Habitacion
-{
-    private IEstrategiaPrecio estrategia;
-
-    public Habitacion(IEstrategiaPrecio estrategia)
-    {
-        this.estrategia = estrategia;
-    }
-
-    public decimal calcularPrecio()
-    {
-        return estrategia.CalcularPrecio();
-    }
-}
-
+// DEMOSTRACIÓN
 
 public static class Demo
 {
@@ -68,32 +64,19 @@ public static class Demo
         Console.WriteLine("        PRÁCTICA 2 - STRATEGY");
         Console.WriteLine();
 
-        var habitacionPrivada =
-            new Habitacion(new PrecioPrivado());
+        var pagoEfectivo =
+            new GestionPagos(new PagoEfectivo());
 
-        var habitacionCompartida =
-            new Habitacion(new PrecioCompartido());
+        var pagoTarjeta =
+            new GestionPagos(new PagoTarjeta());
 
-        var habitacionTemporadaPrivado =
-            new Habitacion(new PrecioTemporadaPrivado());
+        var pagoQR =
+            new GestionPagos(new PagoQR());
 
-        var habitacionTemporadaCompartido =
-            new Habitacion(new PrecioTemporadaCompartido());
+        pagoEfectivo.RegistrarPago(150);
 
-        Console.WriteLine(
-            $"Habitación privada: {habitacionPrivada.calcularPrecio():0.00} Bs"
-        );
+        pagoTarjeta.RegistrarPago(200);
 
-        Console.WriteLine(
-            $"Habitación compartida: {habitacionCompartida.calcularPrecio():0.00} Bs"
-        );
-
-        Console.WriteLine(
-            $"Habitación privada en temporada: {habitacionTemporadaPrivado.calcularPrecio():0.00} Bs"
-        );
-
-        Console.WriteLine(
-            $"Habitación compartida en temporada: {habitacionTemporadaCompartido.calcularPrecio():0.00} Bs"
-        );
+        pagoQR.RegistrarPago(180);
     }
 }
