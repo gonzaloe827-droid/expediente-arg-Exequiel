@@ -76,7 +76,7 @@ public static class Demo
 {
     public static void Correr()
     {
-        Console.WriteLine("        PRÁCTICA 1 - OBSERVER");
+        Console.WriteLine("         OBSERVER");
 
         Console.WriteLine();
 
