@@ -2,8 +2,7 @@
 # C4 - Sistema de Reservas de un Hostal
 
 ## Nivel 1 - Contexto
-
-mermaid
+```mermaid
 C4Context
 
 title Nivel 1 - Contexto del Sistema de Reservas de un Hostal
@@ -25,3 +24,4 @@ Rel(limpieza, sistema, "Actualiza el estado de habitaciones")
 
 Rel(sistema, pagos, "Procesa pagos")
 Rel(sistema, notificaciones, "Envía avisos y comprobantes")
+```
