@@ -3,75 +3,137 @@ namespace H3.Strategy;
 
 // CONTRATO DE LA ESTRATEGIA
 
-public interface IMetodoPago
+public interface ICalculoTarifa
 {
-    void Pagar(decimal monto);
+    decimal Calcular(bool privada);
 }
 
-
-public class PagoEfectivo : IMetodoPago
+public class TarifaHabitacionSimple : ICalculoTarifa
 {
-    public void Pagar(decimal monto)
+    public decimal Calcular(bool privada)
     {
-        Console.WriteLine($"Pago de reserva realizado en efectivo: {monto:0.00} Bs");
+        if (privada)
+            return 300;
+
+        return 100;
+    }
+}
+
+public class TarifaHabitacionDoble : ICalculoTarifa
+{
+    public decimal Calcular(bool privada)
+    {
+        if (privada)
+            return 450;
+
+        return 160;
+    }
+}
+
+public class TarifaHabitacionMatrimonial : ICalculoTarifa
+{
+    public decimal Calcular(bool privada)
+    {
+        if (privada)
+            return 450;
+
+        return 160;
     }
 }
 
 
-public class PagoTarjeta : IMetodoPago
+public class TarifaHabitacionTriple : ICalculoTarifa
 {
-    public void Pagar(decimal monto)
+    public decimal Calcular(bool privada)
     {
-        Console.WriteLine($"Pago de reserva realizado con tarjeta: {monto:0.00} Bs");
+        if (privada)
+            return 600;
+
+        return 240;
     }
 }
 
-
-public class PagoQR : IMetodoPago
+public class TarifaHabitacionCuadruple : ICalculoTarifa
 {
-    public void Pagar(decimal monto)
+    public decimal Calcular(bool privada)
     {
-        Console.WriteLine($"Pago de reserva realizado con QR: {monto:0.00} Bs");
+        if (privada)
+            return 800;
+
+        return 320;
     }
 }
 
-
-public class GestionPagos
+public class GestionTarifas
 {
-    private IMetodoPago metodoPago;
+    private ICalculoTarifa estrategia;
 
-    public GestionPagos(IMetodoPago metodoPago)
+    public GestionTarifas(ICalculoTarifa estrategia)
     {
-        this.metodoPago = metodoPago;
+        this.estrategia = estrategia;
     }
 
-    public void RegistrarPago(decimal monto)
+    public decimal CalcularTarifa(bool privada)
     {
-        metodoPago.Pagar(monto);
+        return estrategia.Calcular(privada);
     }
 }
-
 
 public static class Demo
 {
     public static void Correr()
     {
-        Console.WriteLine("        STRATEGY");
+        Console.WriteLine("         STRATEGY");
         Console.WriteLine();
 
-        var pagoEfectivo =
-            new GestionPagos(new PagoEfectivo());
+        var habitacionSimple =
+            new GestionTarifas(
+                new TarifaHabitacionSimple());
 
-        var pagoTarjeta =
-            new GestionPagos(new PagoTarjeta());
+        var habitacionDoble =
+            new GestionTarifas(
+                new TarifaHabitacionDoble());
 
-        var pagoQR =
-            new GestionPagos(new PagoQR());
+        var habitacionMatrimonial =
+            new GestionTarifas(
+                new TarifaHabitacionMatrimonial());
 
-        pagoEfectivo.RegistrarPago(150);
+        var habitacionTriple =
+            new GestionTarifas(
+                new TarifaHabitacionTriple());
 
-        pagoTarjeta.RegistrarPago(200);
+        var habitacionCuadruple =
+            new GestionTarifas(
+                new TarifaHabitacionCuadruple());
 
-        pagoQR.RegistrarPago(180);
+        Console.WriteLine(
+            $"Habitación simple privada: {habitacionSimple.CalcularTarifa(true):0.00} Bs");
+
+        Console.WriteLine(
+            $"Habitación simple compartida: {habitacionSimple.CalcularTarifa(false):0.00} Bs");
+
+        Console.WriteLine(
+            $"Habitación doble privada: {habitacionDoble.CalcularTarifa(true):0.00} Bs");
+
+        Console.WriteLine(
+            $"Habitación doble compartida: {habitacionDoble.CalcularTarifa(false):0.00} Bs");
+
+        Console.WriteLine(
+            $"Habitación matrimonial privada: {habitacionMatrimonial.CalcularTarifa(true):0.00} Bs");
+
+        Console.WriteLine(
+            $"Habitación matrimonial compartida: {habitacionMatrimonial.CalcularTarifa(false):0.00} Bs");
+
+        Console.WriteLine(
+            $"Habitación triple privada: {habitacionTriple.CalcularTarifa(true):0.00} Bs");
+
+        Console.WriteLine(
+            $"Habitación triple compartida: {habitacionTriple.CalcularTarifa(false):0.00} Bs");
+
+        Console.WriteLine(
+            $"Habitación cuádruple privada: {habitacionCuadruple.CalcularTarifa(true):0.00} Bs");
+
+        Console.WriteLine(
+            $"Habitación cuádruple compartida: {habitacionCuadruple.CalcularTarifa(false):0.00} Bs");
     }
 }
