@@ -1,6 +1,5 @@
 namespace H3.Final;
 
-
 public class Usuario
 {
     public void iniciarSesion()
@@ -32,12 +31,12 @@ public class Cliente : Usuario, IObservadorReserva
         Console.WriteLine("Cliente cancela una reserva");
     }
 
-
     public void Actualizar(string mensaje)
     {
         Console.WriteLine($"[CLIENTE] {mensaje}");
     }
 }
+
 
 public class Recepcionista : Usuario, IObservadorReserva
 {
@@ -51,7 +50,6 @@ public class Recepcionista : Usuario, IObservadorReserva
         Console.WriteLine("Recepcionista gestiona reservas");
     }
 
- 
     public void Actualizar(string mensaje)
     {
         Console.WriteLine($"[RECEPCIONISTA] {mensaje}");
@@ -82,16 +80,15 @@ public class Administrador : Usuario, IObservadorReserva
     }
 }
 
+public interface IObservadorReserva
+{
+    void Actualizar(string mensaje);
+}
 
 public interface ICalculoTarifa
 {
     decimal Calcular(bool privada);
-
-    void CambiarPrecio(
-        bool privada,
-        decimal nuevoPrecio);
 }
-
 
 public class TarifaHabitacionSimple : ICalculoTarifa
 {
@@ -105,18 +102,7 @@ public class TarifaHabitacionSimple : ICalculoTarifa
 
         return precioCompartida;
     }
-
-    public void CambiarPrecio(
-        bool privada,
-        decimal nuevoPrecio)
-    {
-        if (privada)
-            precioPrivada = nuevoPrecio;
-        else
-            precioCompartida = nuevoPrecio;
-    }
 }
-
 
 public class TarifaHabitacionDoble : ICalculoTarifa
 {
@@ -129,16 +115,6 @@ public class TarifaHabitacionDoble : ICalculoTarifa
             return precioPrivada;
 
         return precioCompartida;
-    }
-
-    public void CambiarPrecio(
-        bool privada,
-        decimal nuevoPrecio)
-    {
-        if (privada)
-            precioPrivada = nuevoPrecio;
-        else
-            precioCompartida = nuevoPrecio;
     }
 }
 
@@ -155,15 +131,34 @@ public class TarifaHabitacionMatrimonial : ICalculoTarifa
 
         return precioCompartida;
     }
+}
 
-    public void CambiarPrecio(
-        bool privada,
-        decimal nuevoPrecio)
+
+public class TarifaHabitacionTriple : ICalculoTarifa
+{
+    private decimal precioCompartida = 240;
+    private decimal precioPrivada = 600;
+
+    public decimal Calcular(bool privada)
     {
         if (privada)
-            precioPrivada = nuevoPrecio;
-        else
-            precioCompartida = nuevoPrecio;
+            return precioPrivada;
+
+        return precioCompartida;
+    }
+}
+
+public class TarifaHabitacionCuadruple : ICalculoTarifa
+{
+    private decimal precioCompartida = 320;
+    private decimal precioPrivada = 800;
+
+    public decimal Calcular(bool privada)
+    {
+        if (privada)
+            return precioPrivada;
+
+        return precioCompartida;
     }
 }
 
@@ -176,18 +171,7 @@ public class GestionTarifas
     {
         return estrategia.Calcular(privada);
     }
-
-    public void CambiarPrecio(
-        ICalculoTarifa estrategia,
-        bool privada,
-        decimal nuevoPrecio)
-    {
-        estrategia.CambiarPrecio(
-            privada,
-            nuevoPrecio);
-    }
 }
-
 
 public abstract class Habitacion
 {
@@ -200,18 +184,15 @@ public abstract class Habitacion
     }
 }
 
-public class HabitacionSimple : Habitacion
-{
-}
+public class HabitacionSimple : Habitacion { }
 
-public class HabitacionDoble : Habitacion
-{
-}
+public class HabitacionDoble : Habitacion { }
 
-public class HabitacionMatrimonial : Habitacion
-{
-}
+public class HabitacionMatrimonial : Habitacion { }
 
+public class HabitacionTriple : Habitacion { }
+
+public class HabitacionCuadruple : Habitacion { }
 
 public class GestionHabitaciones
 {
@@ -234,16 +215,12 @@ public class GestionHabitaciones
     }
 }
 
-
-public interface IObservadorReserva
-{
-    void Actualizar(string mensaje);
-}
-
 public interface IReservaRepository
 {
     void guardarReserva();
+
     void eliminarReserva();
+
     void buscarReserva();
 }
 
@@ -286,10 +263,11 @@ public class GestionReservas
         GestionTarifas gestionTarifas)
     {
         this.repository = repository;
+
         this.gestionTarifas = gestionTarifas;
     }
 
-
+    
     public void Suscribir(
         IObservadorReserva observador)
     {
@@ -311,6 +289,7 @@ public class GestionReservas
         ICalculoTarifa estrategia)
     {
         Console.WriteLine();
+
         Console.WriteLine(
             "Registrando reserva...");
 
@@ -321,8 +300,8 @@ public class GestionReservas
             $"Habitación: {habitacion}");
 
         Console.WriteLine(
-            $"Modalidad: " +
-            $"{(privada ? "Privada" : "Compartida")}");
+            $"Modalidad: {(privada ? "Privada" : "Compartida")}");
+
 
         decimal precio =
             gestionTarifas.CalcularTarifa(
@@ -341,6 +320,7 @@ public class GestionReservas
             $"Nueva reserva registrada para {cliente}.");
     }
 
+
     private void Notificar(
         string mensaje)
     {
@@ -354,6 +334,7 @@ public class GestionReservas
             observador3.Actualizar(mensaje);
     }
 
+
     public void cancelarReserva()
     {
         Console.WriteLine(
@@ -361,6 +342,7 @@ public class GestionReservas
 
         repository.eliminarReserva();
     }
+
 
     public void consultarReserva()
     {
@@ -377,6 +359,7 @@ public interface IProcesadorPago
     void procesarPago();
 }
 
+
 public class ServicioPago : IProcesadorPago
 {
     public void procesarPago()
@@ -386,15 +369,18 @@ public class ServicioPago : IProcesadorPago
     }
 }
 
+
 public class GestionPagos
 {
     private IProcesadorPago procesador;
+
 
     public GestionPagos(
         IProcesadorPago procesador)
     {
         this.procesador = procesador;
     }
+
 
     public void registrarPago()
     {
@@ -403,6 +389,7 @@ public class GestionPagos
 
         procesador.procesarPago();
     }
+
 
     public void generarComprobante()
     {
@@ -420,7 +407,8 @@ public static class Demo
         Console.WriteLine(
             " SISTEMA DE RESERVAS DEL HOSTAL");
 
-        var cliente = new Cliente();
+        var cliente =
+            new Cliente();
 
         var recepcionista =
             new Recepcionista();
@@ -428,41 +416,37 @@ public static class Demo
         var administrador =
             new Administrador();
 
-
         var gestionTarifas =
             new GestionTarifas();
+
+        var tarifaSimple =
+            new TarifaHabitacionSimple();
 
         var tarifaDoble =
             new TarifaHabitacionDoble();
 
+        var tarifaMatrimonial =
+            new TarifaHabitacionMatrimonial();
 
-        Console.WriteLine();
+        var tarifaTriple =
+            new TarifaHabitacionTriple();
 
-        Console.WriteLine(
-            "PRECIO ACTUAL: " +
-            $"{gestionTarifas.CalcularTarifa(tarifaDoble, true)} Bs");
-
-        administrador.gestionarTarifas();
-
-        gestionTarifas.CambiarPrecio(
-            tarifaDoble,
-            true,
-            500);
-
-        Console.WriteLine(
-            "NUEVO PRECIO: " +
-            $"{gestionTarifas.CalcularTarifa(tarifaDoble, true)} Bs");
+        var tarifaCuadruple =
+            new TarifaHabitacionCuadruple();
 
 
         var repositorio =
             new BaseDatosMySQL();
+
 
         var gestionReservas =
             new GestionReservas(
                 repositorio,
                 gestionTarifas);
 
-        gestionReservas.Suscribir(cliente);
+
+        gestionReservas.Suscribir(
+            cliente);
 
         gestionReservas.Suscribir(
             recepcionista);
@@ -470,42 +454,44 @@ public static class Demo
         gestionReservas.Suscribir(
             administrador);
 
-      
+
         gestionReservas.registrarReserva(
-            "Marco",
-            "Habitación Doble",
+            "Lucas",
+            "Habitacion Triple",
             true,
-            tarifaDoble);
+            tarifaMatrimonial);
 
 
         Console.WriteLine();
 
         var habitacion =
-            new HabitacionDoble();
+            new HabitacionMatrimonial();
 
-        habitacion.privada = true;
+        habitacion.privada = false;
+
 
         var gestionHabitaciones =
             new GestionHabitaciones();
 
+
         gestionHabitaciones.registrarHabitacion();
 
         gestionHabitaciones.consultarDisponibilidad();
-
 
         Console.WriteLine();
 
         var servicioPago =
             new ServicioPago();
 
+
         var gestionPagos =
             new GestionPagos(
                 servicioPago);
 
+
         gestionPagos.registrarPago();
 
         gestionPagos.generarComprobante();
-
 
         Console.WriteLine();
 
