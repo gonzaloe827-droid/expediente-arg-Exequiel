@@ -1,1 +1,45 @@
 
+# ADR — Uso de Strategy y Observer
+
+## Contexto
+
+El sistema de reservas del hostal necesita mantener organizada la lógica de las reservas y permitir realizar cambios sin afectar todo el sistema También se necesita calcular las tarifas de las habitaciones de diferentes formas y avisar a los usuarios cuando se registra una nueva reserva.
+
+## Decisión
+
+Se decidió implementar los patrones Strategy y Observer dentro de la gestión de reservas.
+
+Strategy se utilizará para calcular las tarifas según el tipo de habitación y si la habitación es privada o compartida. De esta forma se puede cambiar o agregar una forma de calcular la tarifa sin modificar directamente la lógica principal.
+
+Observer se utilizará cuando se registre una nueva reserva y sea necesario avisar a los usuarios interesados, como el Cliente, la Recepcionista y el Administrador.
+
+## Justificación
+
+Se eligieron estos patrones porque los dos problemas principales del sistema son el cálculo de las tarifas y las notificaciones de las nuevas reservas.
+
+Con **Strategy** se separan los diferentes cálculos de las tarifas y con **Observer** se puede avisar a varios usuarios cuando ocurre una nueva reserva.
+
+De esta manera, si en el futuro se agrega otro tipo de habitación o un nuevo usuario que necesite recibir las notificaciones, no será necesario modificar toda la lógica del sistema.
+
+## Alternativas consideradas
+
+Se consideró utilizar **Decorator**, pero se descartó porque el problema del sistema no consiste en agregar características a una reserva mediante capas.
+
+También se consideró **Adapter**, pero no era necesario para la fusión porque nuestro problema principal no era adaptar una interfaz externa.
+
+## Consecuencias
+
+Como beneficio, el sistema queda más organizado y es más fácil modificar los cálculos de las tarifas y las notificaciones.
+
+Como consecuencia, se tienen algunas clases e interfaces adicionales para implementar los patrones y las relaciones entre ellas son un poco más complejas.
+
+## Implementación
+
+La fusión de los dos patrones se encuentra en:
+
+`h3/final/`
+
+Los patrones utilizados son:
+
+- **Strategy:** `GestionTarifas` y las diferentes estrategias de tarifas.
+- **Observer:** `GestionReservas` y los observadores `Cliente`, `Recepcionista` y `Administrador`.
