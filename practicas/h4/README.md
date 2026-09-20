@@ -38,51 +38,23 @@ En este nivel se muestran las partes principales que están dentro del sistema d
 
 ```mermaid
 flowchart TB
-
-cliente["👤 Cliente<br>(realiza y consulta reservas)"]
-
-recepcionista["👤 Recepcionista<br>(gestiona reservas y huéspedes)"]
-
-administrador["👤 Administrador<br>(gestiona usuarios y tarifas)"]
-
-subgraph sistema["🏨 SISTEMA DE RESERVAS DEL HOSTAL"]
-
-    reservas["📋 Gestión de Reservas<br>(registra y consulta reservas)<br>🔔 Observer"]
-
-    tarifas["💰 Gestión de Tarifas<br>(calcula precios)<br>🔄 Strategy"]
-
-    habitaciones["🛏️ Gestión de Habitaciones<br>(registra y consulta habitaciones)"]
-
-    usuarios["👥 Gestión de Usuarios<br>(gestiona usuarios y roles)"]
-
-    pagos["💳 Gestión de Pagos<br>(registra pagos y comprobantes)"]
-
-    bd[("🗄️ Base de Datos<br>MySQL")]
-
-end
-
-pasarela["💳 Pasarela de pagos<br>(sistema externo)"]
-
-
-cliente -->|"realiza reservas"| reservas
-
-recepcionista -->|"gestiona reservas"| reservas
-
-administrador -->|"administra usuarios"| usuarios
-
-administrador -->|"gestiona tarifas"| tarifas
-
-reservas -->|"consulta tarifa"| tarifas
-
-reservas -->|"guarda y consulta"| bd
-
-habitaciones -->|"guarda información"| bd
-
-usuarios -->|"guarda información"| bd
-
-pagos -->|"guarda información"| bd
-
-reservas -->|"solicita pago"| pagos
-
-pagos -->|"procesa pago"| pasarela
+ subgraph sistema["🏨 SISTEMA DE RESERVAS DEL HOSTAL"]
+        reservas["📋 Gestión de Reservas<br>(registra y consulta reservas)<br>🔔 Observer"]
+        tarifas["💰 Gestión de Tarifas<br>(calcula precios)<br>🔄 Strategy"]
+        habitaciones["🛏️ Gestión de Habitaciones<br>(registra y consulta habitaciones)"]
+        usuarios["👥 Gestión de Usuarios<br>(gestiona usuarios y roles)"]
+        pagos["💳 Gestión de Pagos<br>(registra pagos y comprobantes)"]
+        bd[("🗄️ Base de Datos<br>MySQL")]
+  end
+    cliente["👤 Cliente<br>(realiza y consulta reservas)"] -- realiza reservas --> reservas
+    recepcionista["👤 Recepcionista<br>(gestiona reservas y huéspedes)"] -- gestiona reservas --> reservas
+    administrador["👤 Administrador<br>(gestiona usuarios y tarifas)"] -- administra usuarios --> usuarios
+    administrador -- gestiona tarifas --> tarifas
+    reservas -- consulta tarifa --> tarifas
+    reservas -- guarda y consulta --> bd
+    habitaciones -- guarda información --> bd
+    usuarios -- guarda información --> bd
+    pagos -- guarda información --> bd
+    reservas -- solicita pago --> pagos
+    pagos -- procesa pago --> pasarela["💳 Pasarela de pagos<br>(sistema externo)"]
 ```
