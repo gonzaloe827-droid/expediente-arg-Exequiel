@@ -32,14 +32,3 @@ También se consideró **Adapter**, pero no era necesario para la fusión porque
 Como beneficio, el sistema queda más organizado y es más fácil modificar los cálculos de las tarifas y las notificaciones.
 
 Como consecuencia, se tienen algunas clases e interfaces adicionales para implementar los patrones y las relaciones entre ellas son un poco más complejas.
-
-## Implementación
-
-La fusión de los dos patrones se encuentra en:
-
-`h3/final/`
-
-Los patrones utilizados son:
-
-- **Strategy:** `GestionTarifas` y las diferentes estrategias de tarifas.
-- **Observer:** `GestionReservas` y los observadores `Cliente`, `Recepcionista` y `Administrador`.
