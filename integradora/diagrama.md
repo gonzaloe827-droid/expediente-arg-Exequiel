@@ -41,3 +41,4 @@ Cajero --> Pedido
 Administrador --> Pedido
 Administrador --> Menu
 ```
+
