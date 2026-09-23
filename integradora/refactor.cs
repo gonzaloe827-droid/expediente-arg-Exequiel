@@ -2,6 +2,7 @@
 // Refactor de Principio de responsabilidad única
 
 //refactor Gonzalo Exequiel Bautista 
+
 // INTEGRADORA · VARIANTE A — Comedor Universitario "Sabor Andino"
 // Esqueleto del sistema de pedidos del comedor. FUNCIONA, pero fue escrito de apuro:
 // tiene 3 violaciones SOLID. Es la materia prima de tu parte 2.
