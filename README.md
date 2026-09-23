@@ -22,10 +22,6 @@ Administra usuarios
 Gestiona tarifas
 Consulta información del hostal
 
-### 4. Personal de limpieza
-Consulta el estado de las habitaciones
-Actualiza el estado de las habitaciones después de la limpieza
-
 ## 2:Inventarios de modulos 
 
 ### 1. Gestión de habitaciones
